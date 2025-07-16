@@ -9,7 +9,6 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
 
-/**/
 const whitelist = ['http://127.0.0.1:5500', 'https://myapp.co'];
 const options = {
   origin: (origin, callback) => {
@@ -21,8 +20,6 @@ const options = {
   }
 }
 app.use(cors(options));
-
-//app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('My first server with Express.js...');

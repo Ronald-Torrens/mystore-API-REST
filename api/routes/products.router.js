@@ -8,9 +8,13 @@ const service = new ProductsService();
 const validatorHandler = require('../middleware/validator.handler');
 const { createProductSchema, updateProductSchema, getProductSchema } = require('../schemas/products.schemas');
 
-router.get('/', async (req, res) => {
-  const products = await service.find();
-  res.status(200).json(products);
+router.get('/', async (req, res, next) => {
+  try {
+    const products = await service.find();
+    res.status(200).json(products);
+  } catch (error) {
+    next(error);
+  };
 });
 
 // Generando consulta específica por id:
@@ -32,10 +36,14 @@ router.get('/:id',
 
 router.post('/',
   validatorHandler(createProductSchema, 'body'),
-  async (req, res) => {
-    const body = req.body;
-    const newProduct = await service.create(body);
-    res.status(201).json(newProduct);
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      const newProduct = await service.create(body);
+      res.status(201).json(newProduct);
+    } catch (error) {
+      next(error);
+    };
   }
 );
 

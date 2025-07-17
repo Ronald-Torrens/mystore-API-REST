@@ -84,7 +84,7 @@ Puedes probar la API usando Insomnia. Sigue estos pasos:
 
 ```http
 Método: GET
-URL: http://localhost:3000/products
+URL: http://localhost:3000/api/v1/products
 ```
 
 4. Haz clic en "Send" para ver los resultados.

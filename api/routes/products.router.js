@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const ProductsService = require('./../services/product.service');
+const ProductsService = require('../services/product.service');
 const service = new ProductsService();
 
 const validatorHandler = require('../middleware/validator.handler');
@@ -59,10 +59,17 @@ router.patch('/:id',
 
 // Generando el método DELETE:
 
-router.delete('/:id', async (req, res) => {
-  const { id } = req.params;
-  const deleteProduct = await service.delete(id);
-  res.status(200).json(deleteProduct);
-});
+router.delete('/:id',
+  validatorHandler(getProductSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const deleteProduct = await service.delete(id);
+      res.status(200).json(deleteProduct);
+    } catch (error) {
+      next(error);
+    };
+  }
+);
 
 module.exports = router;

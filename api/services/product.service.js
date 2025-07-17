@@ -32,11 +32,7 @@ class ProductsService {
   };
 
   find() {
-    return new Promise((resolve, reject) => {
-      setTimeout( () => {
-        resolve(this.products);
-      }, 1500);
-    });
+    return this.products;
   };
 
   findOne(id) {

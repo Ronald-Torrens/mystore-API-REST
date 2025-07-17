@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
 
-/*
+/**/
 const whitelist = ['http://127.0.0.1:5500', 'https://myapp.co'];
 const options = {
   origin: (origin, callback) => {
@@ -21,12 +21,11 @@ const options = {
   }
 }
 app.use(cors(options));
-*/
 
-app.use(cors()); // Sólo para usar con Glitch
+//app.use(cors()); // Sólo para usar con Glitch
 
 app.get('/', (req, res) => {
-  res.send('My first server with Express.js...');
+  res.send(`<h1>My first server with Express.js...</h1>`);
 });
 
 routerApi(app);
@@ -36,5 +35,5 @@ app.use(boomErrorHandler);
 app.use(errorHandler);
 
 app.listen(port, () => {
-  console.log(`App is running on the port: ${port}.`);
+  console.log(`✅ App is running on the port: ${port}.`);
 });
